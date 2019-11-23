@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<f:viewAction action="#{fornecedoresBean.consultar}" />
+		</f:metadata>
+
+		<h1>Cadastro de Fornecedores</h1>
+
+		<h:form id="frm">
+
+			<p:messages id="msgs" closable="True"/>
+
+			<p:toolbar id="toolbar">
+				<f:facet name="left">
+					<p:commandButton value="Novo" icon="ui-icon-document"
+						action="#{fornecedoresBean.prepararNovoCadastro}"
+						process="@this" update="fornecedor-dialog"
+						oncomplete="PF('edicaoFornecedorDialog').show()">
+						<p:resetInput target="fornecedor-dialog" />
+					</p:commandButton>
+						
+					<span class="ui-separator"> <span
+						class="ui-icon ui-icon-grip-dotted-vertical" />
+					</span>
+
+            		<p:commandButton icon="ui-icon-pencil" title="Editar" 
+            			process="@this" update="fornecedor-dialog toolbar"
+            			oncomplete="PF('edicaoFornecedorDialog').show()"
+            			disabled="#{fornecedoresBean.fornecedorSelecionado  == null}">
+            			
+            			<p:resetInput target="fornecedor-dialog" />
+            			
+            			<f:setPropertyActionListener value="#{fornecedoresBean.fornecedorSelecionado}" 
+            				target="#{fornecedoresBean.fornecedorEdicao}" />
+            		</p:commandButton>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir" 
+						process="@this" update="fornecedores-table msgs toolbar"
+						action="#{fornecedoresBean.excluir}"
+            			disabled="#{fornecedoresBean.fornecedorSelecionado == null}" >
+            			
+            			<p:confirm icon="ui-icon-alert" header="Atenção"
+            				message="Tem certeza que deseja excluir o fornecedor?" />
+            				
+            		</p:commandButton>
+            			
+					<p:commandButton icon="ui-icon-arrowthick-1-s" title="Exportar para XLS"
+            				ajax="false" immediate="true">
+            			<p:dataExporter type="xls" target="fornecedores-table" fileName="fornecedores" />
+            		</p:commandButton>
+            		
+				</f:facet>
+			</p:toolbar>
+
+			<p:dataTable value="#{fornecedoresBean.todosFornecedores}"
+				var="fornecedor" paginator="true" rows="5"
+				paginatorPosition="bottom" style="margin-top:10px" 
+				id="fornecedores-table" widgetVar="tabelaFornecedores"
+				emptyMessage="Nenhum fornecedor cadastrado."
+				filteredValue="#{fornecedoresBean.fornecedoresFiltrados}"
+				selection="#{fornecedoresBean.fornecedorSelecionado}"
+				selectionMode="single" rowKey="#{fornecedor.id}">
+				
+				<p:ajax event="rowSelect" update=":frm:toolbar" />
+				<p:ajax event="rowUnselect" update=":frm:toolbar" />
+
+				<p:column headerText="Razão social" width="150"
+					sortBy="#{fornecedor.razaoSocial}" 
+					filterBy="#{fornecedor.razaoSocial}" filterMatchMode="contains">
+					<h:outputText value="#{fornecedor.razaoSocial}" />
+				</p:column>
+				
+				<p:column headerText="E-mail" width="150">
+					<h:outputText value="#{fornecedor.email}" />
+				</p:column>
+				
+				<p:column headerText="CNPJ" width="100" sortBy="#{fornecedor.cnpj}">
+					<h:outputText value="#{fornecedor.cnpj}" />
+				</p:column>
+			</p:dataTable>
+
+			<p:dialog header="Fornecedor" widgetVar="edicaoFornecedorDialog"
+				id="fornecedor-dialog" resizable="false" modal="true"
+				closeOnEscape="true">
+
+				<p:messages id="msgs-dialog" />
+				<p:defaultCommand target="salvar-button" scope="fornecedor-dialog" />
+				
+				<h:panelGrid columns="2" id="painel-dialog">
+
+					<p:outputLabel value="Razão Social" for="razao-social" />
+					<p:inputText id="razao-social" size="60" maxlength="80" 
+					value="#{fornecedoresBean.fornecedorEdicao.razaoSocial}" />
+					
+					<p:outputLabel value="Nome fantasia" for="nome-fantasia" />
+					<p:inputText id="nome-fantasia" size="60" maxlength="80" 
+					value="#{fornecedoresBean.fornecedorEdicao.nomeFantasia}" />
+
+ 					<p:outputLabel value="Tipo empresa" for="tipo" />
+					<p:selectOneMenu id="tipo"
+						value="#{fornecedoresBean.fornecedorEdicao.tipo}">
+						<f:selectItem itemLabel="Selecione" />
+						<f:selectItems value="#{fornecedoresBean.tipos}" var="item"
+							itemLabel="#{item.tipo}" itemValue="#{item}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="CNPJ" for="cnpj" />
+					<p:inputMask id="cnpj" size="18" maxlength="18" 
+					value="#{fornecedoresBean.fornecedorEdicao.cnpj}" 
+					mask="99.999.999/9999-99" />
+
+					<p:outputLabel value="E-mail" for="email" />
+					<p:inputText id="email" size="60" maxlength="60" 
+					value="#{fornecedoresBean.fornecedorEdicao.email}" />
+					
+					<p:outputLabel value="Fundação:" for="fundacao"/>
+       				<p:calendar id="fundacao" value="#{fornecedoresBean.fornecedorEdicao.dataFundacao}" 
+       							pattern="dd/MM/yyyy" mask="true" /> 
+
+					<p:outputLabel />
+					
+					<p:commandButton value="Salvar" id="salvar-button" 
+					action="#{fornecedoresBean.salvar}" icon="ui-icon-disk"
+					process="fornecedor-dialog" update="msgs-dialog painel-dialog"
+					oncomplete="if (!args.validationFailed) PF('edicaoFornecedorDialog').hide();" />
+
+				</h:panelGrid>
+
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
