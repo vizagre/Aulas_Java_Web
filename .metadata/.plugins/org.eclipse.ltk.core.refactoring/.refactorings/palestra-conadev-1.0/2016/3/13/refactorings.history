@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Messages.properties&apos; to &apos;didata&apos;&#x0D;&#x0A;- Original project: &apos;palestra-conadev-1.0&apos;&#x0D;&#x0A;- Destination element: &apos;didata&apos;&#x0D;&#x0A;- Original element: &apos;Messages.properties&apos;" description="Copy file" element1="src/main/resources/com/algaworks/conadev/Messages.properties" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1458694675670" target="/ProjetoExemplo/src/main/resources/br/com/didata" units="0" version="1.0"/>
+</session>

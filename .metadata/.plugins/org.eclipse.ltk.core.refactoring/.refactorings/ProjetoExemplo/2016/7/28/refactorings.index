@@ -1,0 +1,10 @@
+1467585448421	Rename type 'Fornecedores'
+1467940103000	Rename type 'TipoFornecedor'
+1467940145039	Rename field 'classificacao'
+1467941777936	Delete element
+1467941835546	Delete element
+1467941840227	Delete element
+1467941843130	Delete element
+1467941850950	Delete element
+1467944839581	Rename type 'FornecedoresRepository'
+1467944851231	Rename type 'CriaFornecedorComRepository'

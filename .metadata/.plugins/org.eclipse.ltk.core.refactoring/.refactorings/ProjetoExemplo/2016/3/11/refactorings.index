@@ -1,0 +1,14 @@
+1457309549579	Delete element
+1457312454789	Delete element
+1457394640722	Rename type 'JpaUtil'
+1457394936651	Rename compilation unit 'ConnectionFactory.java'
+1457485234086	Move compilation unit
+1457490919668	Infer generic type arguments
+1457491413908	Delete element
+1457495991766	Delete elements
+1457497316815	Delete element
+1457571218888	Delete element
+1457571292075	Rename type 'ConnectionFactory'
+1457571297364	Move compilation unit
+1457575525569	Rename package 'br.com.didata.TestaPersistencia'
+1457577033505	Rename type 'CriaFornecedores'

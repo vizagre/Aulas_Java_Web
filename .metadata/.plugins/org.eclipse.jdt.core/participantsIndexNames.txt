@@ -1,0 +1,3 @@
+INDEX VERSION 1.131
+/home/vizagre/Workspace_JavaParaWeb/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1990028087.index
+/EditoraWeb/src

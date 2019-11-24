@@ -1,0 +1,6 @@
+1471814942130	Rename type 'LogonBean'
+1471816475676	Rename field 'logon'
+1471816493334	Rename field 'senha'
+1472005296791	Move 2 resources to 'sistema'
+1472007638472	Move 'sistema' to 'WEB-INF'
+1472007870063	Move 'sistema' to 'webapp'

@@ -1,0 +1,1 @@
+INDEX VERSION 1.4+/home/vizagre/Workspace_JavaParaWeb/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
