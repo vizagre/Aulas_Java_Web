@@ -8,7 +8,7 @@ public class ConnectionFactory {
 	public static Connection getConnection() {
 		try {
 
-			return DriverManager.getConnection("jdbc:mysql://localhost/Livraria_Didata", "root", "master");
+			return DriverManager.getConnection("jdbc:mysql://localhost/livraria_didata", "vizagre", "P@ssw0rd14031506");
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
